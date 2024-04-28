@@ -6,6 +6,7 @@ import com.isi.mdl.entities.User;
 
 public interface UserRepository  extends JpaRepository<User,Long>{
 	
-	User findByEmailAndPassword(String email, String password);
+	User findByEmailAndPasswordAndActiveTrue(String email, String password);
+	boolean existsUserByEmail(String email);
 
 }

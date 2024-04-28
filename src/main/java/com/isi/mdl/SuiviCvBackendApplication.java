@@ -59,14 +59,14 @@ public class SuiviCvBackendApplication {
 	                user.setEmail(name);
 	                user.setPassword(name);
 	                user.setActive(true);
-	                user.setDateCreation(new Date());
+	                user.setCreationDate(new Date());
 	                user.setProfile(Profiles.ADMIN);
 	                userRepository.save(user);
 	            });
 	        
 	            User user1 =new User ();
 	            
-	            user1= userRepository.findByEmailAndPassword("Yassine", "Yassine");
+	            user1= userRepository.findByEmailAndPasswordAndActiveTrue("Yassine", "Yassine");
 	            log.info("Resultat Recherche Utilisateur : "+user1.getEmail());
 	        };
 	        

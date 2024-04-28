@@ -11,30 +11,28 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
-import com.isi.mdl.enums.Profiles;
-
-
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
 @Entity
 @Data @NoArgsConstructor  @AllArgsConstructor
-@Table(name = "Utilisateur")
-public class User {
-	
+@Table(name = "Bank_Question")
+public class QuestionBank {
+	@Column(name = "id_question")
 	@Id @GeneratedValue(strategy = GenerationType.IDENTITY)
-	@Column(name = "id_utilisateur")
-	private Long idUser;
-	@Column(name = "email")
-	private String email;
-	@Column(name = "password")
-	private String password;
+	private Long idQuestion;
+	@Column(name = "question")
+	private String questtion;
+	@Column(name = "reponse")
+	private String response;
 	@Column(name = "date_creation")
 	private Date creationDate;
+	@Column(name = "date_annulation")
+	private Date annulation_date;
 	@Column(name = "active")
 	private boolean active;
-   @Enumerated(EnumType.STRING)
-   @Column(name = "profile")
-   private Profiles profile;
+	@Column(name = "point")
+	private int point;
+ 
 }
