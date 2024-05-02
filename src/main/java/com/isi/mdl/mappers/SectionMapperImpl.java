@@ -5,8 +5,12 @@ import org.springframework.stereotype.Service;
 
 import com.isi.mdl.dto.SectionDto;
 import com.isi.mdl.entities.Section;
+import com.isi.mdl.services.impl.SectionServiceImpl;
+
+import lombok.extern.slf4j.Slf4j;
 
 @Service
+@Slf4j
 public class SectionMapperImpl {
 
 	public SectionDto fromSection(Section section) {

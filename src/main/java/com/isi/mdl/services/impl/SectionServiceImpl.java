@@ -32,6 +32,7 @@ public class SectionServiceImpl implements SectionService {
 		log.info("Save Section");
 		Section section = dtoMapper.fromSectionDto(sectionDto);
 		Section saveSection = sectionRepository.save(section);
+		log.info("dtoMapper.fromSection(saveSection) "+ dtoMapper.fromSection(saveSection));
 		return dtoMapper.fromSection(saveSection);
 	}
 

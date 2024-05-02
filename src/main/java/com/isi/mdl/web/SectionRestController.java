@@ -37,7 +37,8 @@ public class SectionRestController {
 	public ResponseEntity<?> saveSection(@RequestBody SectionDto sectionDto) {
 	    try {
 	    	SectionDto savedSectionDto = sectionService.saveSection(sectionDto);
-	        return ResponseEntity.status(HttpStatus.CREATED).body(sectionDto);
+	    	log.info("Save Api Section"+savedSectionDto);
+	        return ResponseEntity.status(HttpStatus.CREATED).body(savedSectionDto);
 	    } catch (Exception e) {
 	        return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Une erreur est survenue lors de l'enregistrement de la Section.");
 	    }
@@ -51,7 +52,7 @@ public class SectionRestController {
 	}
 	
 	
-	//@RequestMapping(value="/UpdateSection", method= RequestMethod.PUT)
+	
 	@PutMapping("/UpdateSection/{codeSection}")
     public ResponseEntity<?> updateSection(@PathVariable (name = "codeSection") String codeSection, @RequestBody SectionDto sectionDto ) {
         java.util.Optional<Section> userOptional = sectionService.updateSection(sectionDto, codeSection);
