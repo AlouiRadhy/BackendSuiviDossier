@@ -31,6 +31,8 @@ public class QuestionBank {
 	private Long idQuestion;
 	@Column(name = "question")
 	private String question;
+	@Column(name = "choix")
+	private String choix;
 	@Column(name = "reponse")
 	private String response;
 	@Column(name = "date_creation")
