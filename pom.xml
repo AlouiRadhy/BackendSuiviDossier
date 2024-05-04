@@ -41,11 +41,11 @@
 			<artifactId>spring-boot-starter-test</artifactId>
 			<scope>test</scope>
 		</dependency>
-		<dependency>
+		<!--<dependency>
 			<groupId>com.isi.test</groupId>
 			<artifactId>backendTest</artifactId>
 			<version>0.0.2</version>
-		</dependency>
+		</dependency>!-->
 		<dependency>
 			<groupId>org.modelmapper</groupId>
 			<artifactId>modelmapper</artifactId>
