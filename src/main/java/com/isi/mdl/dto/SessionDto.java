@@ -13,16 +13,16 @@ import lombok.Data;
 
 @Data
 public class SessionDto {
-	
+
 	private Long idSession;
 	private String libelleSession;
-    @Temporal(TemporalType.DATE)
-    @Column(name = "Date_Debut")
-    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "dd-MM-yyyy")
+	@Temporal(TemporalType.DATE)
+	@Column(name = "Date_Debut")
+	@JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "dd-MM-yyyy")
 	private Date startDate;
-    @Temporal(TemporalType.DATE)
-    @Column(name = "Date_Debut")
-    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "dd-MM-yyyy")
+	@Temporal(TemporalType.DATE)
+	@Column(name = "Date_Debut")
+	@JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "dd-MM-yyyy")
 	private Date endDate;
 	private boolean active;
 	private int nbrQuestions;

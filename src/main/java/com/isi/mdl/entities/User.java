@@ -34,6 +34,10 @@ public class User {
 	private String email;
 	@Column(name = "password")
 	private String password;
+	@Column(name = "name")
+	private String name;
+	@Column(name = "firstName")
+	private String firstName;
 	@Temporal(TemporalType.TIMESTAMP)
 	@Column(name = "date_creation")
 	private Date creationDate;

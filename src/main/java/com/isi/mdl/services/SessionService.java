@@ -16,6 +16,8 @@ public interface SessionService {
 	
 	Optional<Session> updateSession (SessionDto sessionDto);
 	
+	Optional<SessionDto> getSession(Long id);
+	
 	void deleteSession(Long id);
 	
 }

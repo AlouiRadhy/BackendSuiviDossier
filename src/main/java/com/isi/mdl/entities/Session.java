@@ -20,7 +20,7 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import javax.persistence.JoinColumn;
-;
+
 
 @Entity
 @Data
@@ -63,9 +63,9 @@ public class Session {
     
     @ManyToMany
     @JoinTable(
-        name = "Session_Question_Association",
+        name = "Session_Question",
         		joinColumns = @JoinColumn(name = "id_session"),
-                inverseJoinColumns = @JoinColumn(name = "id_question")
+                inverseJoinColumns = @JoinColumn(name = "id_Langue")
     )
     @JsonIgnore
     private List<QuestionBank> questions;
