@@ -13,6 +13,7 @@ import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
@@ -59,28 +60,30 @@ public class DossierCondidat {
 
 	@Column(name = "active")
 	private boolean active;
-	
-	
+
 	@OneToMany(cascade = CascadeType.ALL)
 	@JoinColumn(name = "dossier_id")
 	private List<Loisir> loisirs;
-	
+
 	@OneToMany(cascade = CascadeType.ALL)
 	@JoinColumn(name = "dossier_id")
-	private List <Competence> competences;
-	
+	private List<Competence> competences;
+
 	@OneToMany(cascade = CascadeType.ALL)
 	@JoinColumn(name = "dossier_id")
 	private List<CertificatProfissional> certificatProfissional;
-	
-	
-	 @ManyToMany
-	    @JoinTable(
-	        name = "Dossier_Condidat_langue",
-	        		joinColumns = @JoinColumn(name = "id_dossier"),
-	                inverseJoinColumns = @JoinColumn(name = "id_question")
-	    )
-	    @JsonIgnore
-	    private List<Langue> langues;
+
+	@OneToOne(cascade = CascadeType.ALL)
+	@JoinColumn(name = "adresse_id", referencedColumnName = "id_Adress")
+	private Adress adress;
+
+	@OneToMany(cascade = CascadeType.ALL)
+	@JoinColumn(name = "dossier_id")
+	private List<Diplome> Diplomes;
+
+	@ManyToMany
+	@JoinTable(name = "Dossier_Condidat_langue", joinColumns = @JoinColumn(name = "id_dossier"), inverseJoinColumns = @JoinColumn(name = "id_question"))
+	@JsonIgnore
+	private List<Langue> langues;
 
 }
