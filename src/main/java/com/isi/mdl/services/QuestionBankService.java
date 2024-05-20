@@ -13,7 +13,7 @@ public interface QuestionBankService {
 
 	Optional<QuestionBankDto> getQuestionById(Long id);
 
-	QuestionBankDto createQuestionBank(QuestionBankDto questionBankDto);
+	QuestionBankDto createQuestionBank(QuestionBankDto questionBankDto, Long idSection);
 
 	Optional<QuestionBank> updateQuestionBank(Long id, QuestionBankDto updatedQuestionBankDto);
 	

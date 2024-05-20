@@ -5,6 +5,7 @@ import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
 
+import org.aspectj.weaver.patterns.TypePatternQuestions.Question;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -14,6 +15,7 @@ import com.isi.mdl.entities.QuestionBank;
 import com.isi.mdl.entities.Session;
 import com.isi.mdl.mappers.QuestionBankMapperImpl;
 import com.isi.mdl.mappers.SessionMapperImpl;
+import com.isi.mdl.repositories.QuestionBankRepository;
 import com.isi.mdl.repositories.SessionRepository;
 import com.isi.mdl.services.SessionService;
 
@@ -29,17 +31,24 @@ public class SessionServiceImpl  implements SessionService{
 	
 	private SessionRepository sessionRepository;
 	private SessionMapperImpl sessiondtoMapper;
-	private QuestionBankMapperImpl questionMapper;
+	private QuestionBankMapperImpl questionBankMapper;
+	private QuestionBankRepository questionRepoitory;
+
+	
 	@Override
-	public SessionDto saveSession(SessionDto sessionDto) {
+	public SessionDto saveSession(SessionDto sessionDto, List<Long> questionsIds) {
+		
+		 List<QuestionBank> questions = questionsIds.stream()
+	                .map(id -> questionRepoitory.findById(id))
+	                .filter(Optional::isPresent)
+	                .map(Optional::get)
+	                .collect(Collectors.toList());
+		 List<QuestionBankDto> questionsDto=questions.stream()
+				    .map(questionBankMapper::fromQuestionBank)
+				    .collect(Collectors.toList());
+		 sessionDto.setQuestions(questionsDto);
 		log.info("Save Session : " + sessionDto);
 		Session session =sessiondtoMapper.fromSessionDto(sessionDto);
-		List <QuestionBankDto> questionBankDto=sessionDto.getQuestions();
-		List<QuestionBank> questionBank = questionBankDto.stream()
-			    .map(questionMapper::fromQuestionBankDto)
-			    .collect(Collectors.toList());
-		
-		session.setQuestions(questionBank);
 		Session saveSession = sessionRepository.save(session);
 		return sessiondtoMapper.fromSession(saveSession);
 	

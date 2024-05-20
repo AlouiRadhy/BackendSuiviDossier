@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.isi.mdl.dto.SessionDto;
@@ -29,9 +30,11 @@ public class SessionRestController {
 	
 	
 	@RequestMapping(value = "/SaveSession", method = RequestMethod.POST)
-	public ResponseEntity<?> saveSession(@RequestBody SessionDto sessionDto) {
+	public ResponseEntity<?> saveSession(@RequestBody SessionDto sessionDto,@RequestParam List<Long> questionsIds) {
 	    try {
-	    	SessionDto savedSessionDto = sessionService.saveSession(sessionDto);
+	    	
+	    	
+	    	SessionDto savedSessionDto = sessionService.saveSession(sessionDto,questionsIds);
 	        return ResponseEntity.status(HttpStatus.CREATED).body(savedSessionDto);
 	    } catch (Exception e) {
 	        return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Une erreur est survenue lors de l'enregistrement de la Session.");

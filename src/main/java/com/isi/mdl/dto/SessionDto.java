@@ -8,6 +8,7 @@ import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 import lombok.Data;
 
@@ -29,5 +30,4 @@ public class SessionDto {
 	private int nbrCandidats;
 	private int successScore;
 	private List<QuestionBankDto> questions;
-
 }

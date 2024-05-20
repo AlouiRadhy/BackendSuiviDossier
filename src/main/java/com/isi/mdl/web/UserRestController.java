@@ -21,6 +21,8 @@ import org.springframework.web.bind.annotation.RestController;
 import com.isi.mdl.dto.UserDto;
 import com.isi.mdl.entities.User;
 import com.isi.mdl.services.UserService;
+import com.isi.mdl.services.impl.MailService;
+import com.isi.mdl.utils.MailStructure;
 
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -32,6 +34,7 @@ import lombok.extern.slf4j.Slf4j;
 public class UserRestController {
 
 	private UserService userService;
+	private MailService mailService; 
 	
 	@GetMapping("/loginUser")
 	public ResponseEntity<?> user(@RequestParam(name = "email") String email,
@@ -70,6 +73,14 @@ public class UserRestController {
 	        }
 	    }
 
+	
+	@PostMapping("/send")
+	public String sendMail(@RequestParam  String email, @RequestBody MailStructure mailStructure) {
+		mailService.sendMmail(email,mailStructure);
+		 return  "Envoie Email avec succes ";
+	}
+	
+	
 
 	@ExceptionHandler(Exception.class)
 	@ResponseStatus(HttpStatus.BAD_REQUEST)

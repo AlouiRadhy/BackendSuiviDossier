@@ -13,5 +13,5 @@ public class QuestionBankDto {
 	private Date creationDate = new Date();
 	private boolean active;
 	private int point;
-	private Long idSection;
+	private SectionDto section;
 }

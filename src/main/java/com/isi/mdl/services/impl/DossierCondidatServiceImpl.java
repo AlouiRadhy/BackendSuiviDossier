@@ -1,16 +1,33 @@
 package com.isi.mdl.services.impl;
 
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import java.util.ArrayList;
+import java.util.List;
 
+import com.isi.mdl.dto.CertificatProfissionalDto;
+import com.isi.mdl.dto.CompetenceDto;
+import com.isi.mdl.dto.DiplomeDto;
 import com.isi.mdl.dto.DossierCondidatDto;
+import com.isi.mdl.dto.LoisirDto;
+import com.isi.mdl.entities.CertificatProfissional;
+import com.isi.mdl.entities.Competence;
+import com.isi.mdl.entities.Diplome;
 import com.isi.mdl.entities.DossierCondidat;
+import com.isi.mdl.entities.Loisir;
+import com.isi.mdl.entities.User;
+import com.isi.mdl.mappers.CertificatProfissionalMapperImpl;
+import com.isi.mdl.mappers.CompetenceMapperImpl;
+import com.isi.mdl.mappers.DiplomeMapperImpl;
 import com.isi.mdl.mappers.DossierCondidatMapperImpl;
+import com.isi.mdl.mappers.LoisirDtoMapperImpl;
 import com.isi.mdl.mappers.SectionMapperImpl;
 import com.isi.mdl.repositories.DossierCondidatRepository;
 import com.isi.mdl.repositories.SectionRepository;
+import com.isi.mdl.repositories.UserRepository;
 import com.isi.mdl.services.DossierCondidatService;
 
 import lombok.AllArgsConstructor;
@@ -24,11 +41,17 @@ public class DossierCondidatServiceImpl implements DossierCondidatService {
 
 	private  DossierCondidatRepository  dossierCondidatRepository;
 	private  DossierCondidatMapperImpl      dtoMapperDossier;
-	
+	private LoisirDtoMapperImpl loisirDtoMapper;
+	private DiplomeMapperImpl diplomeMapper;
+	private CertificatProfissionalMapperImpl certificatProfissionalMapper;
+	private CompetenceMapperImpl competenceMapper;
+	private UserRepository userRepository;
 	
 	@Override
-	public DossierCondidatDto saveDossierCondidat(DossierCondidatDto dossierCondidatDto) {
+	public DossierCondidatDto saveDossierCondidat(DossierCondidatDto dossierCondidatDto,String emailUser) {
 		log.info("Save DossierCondidat");
+		User user=userRepository.findByEmail(emailUser);
+		log.info("User == "+user);
 		DossierCondidat dossierCondidat =dtoMapperDossier.fromDossierCondidatDto(dossierCondidatDto);
 		DossierCondidat  dossierCondidatSave=dossierCondidatRepository.save(dossierCondidat);
 		return dtoMapperDossier.fromDossierCondidat(dossierCondidat);

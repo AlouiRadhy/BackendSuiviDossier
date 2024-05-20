@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.isi.mdl.dto.QuestionBankDto;
@@ -32,9 +33,9 @@ public class QuestionBankRestController {
 
 	
 	@RequestMapping(value = "/SaveQuestion", method = RequestMethod.POST)
-	public ResponseEntity<?> saveSection(@RequestBody QuestionBankDto questionBankDto) {
+	public ResponseEntity<?> saveSection(@RequestBody QuestionBankDto questionBankDto ,@RequestParam(name = "idSection") Long idSection) {
 	    try {
-	    	QuestionBankDto questionBankDtoResult = questionBankService.createQuestionBank(questionBankDto);
+	    	QuestionBankDto questionBankDtoResult = questionBankService.createQuestionBank(questionBankDto,idSection);
 	        return ResponseEntity.status(HttpStatus.CREATED).body(questionBankDtoResult);
 	    } catch (Exception e) {
 	        return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Une erreur est survenue lors de l'enregistrement de la Question.");

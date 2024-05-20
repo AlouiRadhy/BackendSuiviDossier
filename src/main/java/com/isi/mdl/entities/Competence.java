@@ -16,11 +16,11 @@ import lombok.NoArgsConstructor;
 @Table(name = "Competence")
 public class Competence {
 	@Id @GeneratedValue(strategy = GenerationType.IDENTITY)
-	@Column(name = "id_Comptence")
-	private Long idComptence;
+	@Column(name = "id_Competence")
+	private Long idCompetence;
 	
-	@Column(name = "libelle_Comptance")
-	private String libelleComptence;
+	@Column(name = "libelle_Competence")
+	private String libelleCompetence;
 	
 
 }

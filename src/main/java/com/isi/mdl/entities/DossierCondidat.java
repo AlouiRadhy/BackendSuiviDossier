@@ -6,6 +6,8 @@ import java.util.List;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -19,6 +21,10 @@ import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.isi.mdl.enums.EtatCivile;
+import com.isi.mdl.enums.GENRE;
+import com.isi.mdl.enums.Niveau;
+import com.isi.mdl.enums.Profiles;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -57,6 +63,19 @@ public class DossierCondidat {
 
 	@Column(name = "score_dossier")
 	private int scoreDossier;
+	
+	@Enumerated(EnumType.STRING)
+	@Column(name = "genre")
+	private GENRE genre;
+	
+	@Enumerated(EnumType.STRING)
+	@Column(name = "etatCivile")
+	private EtatCivile etatCivile;
+	
+	@Enumerated(EnumType.STRING)
+	@Column(name = "niveau")
+	private Niveau niveau;
+	
 
 	@Column(name = "active")
 	private boolean active;
@@ -76,7 +95,12 @@ public class DossierCondidat {
 	@OneToOne(cascade = CascadeType.ALL)
 	@JoinColumn(name = "adresse_id", referencedColumnName = "id_Adress")
 	private Adress adress;
-
+	
+	@OneToOne(cascade = CascadeType.ALL)
+	@JoinColumn(name = "id_utilisateur", referencedColumnName = "id_utilisateur")
+	private User  user;
+	
+	
 	@OneToMany(cascade = CascadeType.ALL)
 	@JoinColumn(name = "dossier_id")
 	private List<Diplome> Diplomes;

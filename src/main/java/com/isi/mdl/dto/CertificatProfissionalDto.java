@@ -5,7 +5,7 @@ import lombok.Data;
 @Data
 public class CertificatProfissionalDto {
 	
-	private String codeCertificatProfissional;
+	//private String codeCertificatProfissional;
 	private String libelleCertificatProfissional;
 
 }

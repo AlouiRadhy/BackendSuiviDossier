@@ -49,14 +49,12 @@ public class QuestionBankServiceImpl implements QuestionBankService {
 	}
 
 	@Override
-	public QuestionBankDto createQuestionBank(QuestionBankDto questionBankDto) {
-		log.info("Save QuestionBank : " + questionBankDto);
-		Long sectionId = questionBankDto.getIdSection();
-
-		Section section = sectionRepository.findById(sectionId)
-				.orElseThrow(() -> new IllegalArgumentException("Section non trouvée avec l'ID: " + sectionId));
-		QuestionBank questionBank = dtoMapper.fromQuestionBankDto(questionBankDto);
-		questionBank.setSection(section);
+	public QuestionBankDto createQuestionBank(QuestionBankDto questionBankDto, Long idSection) {
+		//log.info("Save QuestionBank : " + questionBankDto);
+		log.info("idSection "+idSection);
+		SectionDto sectionDto=dtoSectionMapper.fromSection(sectionRepository.findById(idSection).get());
+		questionBankDto.setSection(sectionDto);
+		QuestionBank questionBank = dtoMapper.fromQuestionBankDto(questionBankDto);   
 		QuestionBank saveQuestionBank = questionBankRepository.save(questionBank);
 		return dtoMapper.fromQuestionBank(questionBank);
 	}

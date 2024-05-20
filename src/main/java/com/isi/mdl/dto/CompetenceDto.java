@@ -4,5 +4,6 @@ import lombok.Data;
 
 @Data
 public class CompetenceDto {
-	private String libelleComptence;
+	//private Long idCompetence;
+	private String libelleCompetence;
 }
