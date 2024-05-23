@@ -24,10 +24,10 @@ public class SessionMapperImpl {
 
 	public SessionDto fromSession(Session session) {
 		SessionDto sessionDto = new SessionDto();
-		log.info("Test 1");
+		
 		List<QuestionBankDto> questionBankDtp = session.getQuestions().stream().map(questionMapper::fromQuestionBank)
 				.collect(Collectors.toList());
-		log.info("Test 2s");
+	
 		sessionDto.setQuestions(questionBankDtp);
 		BeanUtils.copyProperties(session, sessionDto);
 		return sessionDto;

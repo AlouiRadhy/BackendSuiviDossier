@@ -13,6 +13,7 @@ import com.isi.mdl.dto.CompetenceDto;
 import com.isi.mdl.dto.DiplomeDto;
 import com.isi.mdl.dto.DossierCondidatDto;
 import com.isi.mdl.dto.LoisirDto;
+import com.isi.mdl.dto.UserDto;
 import com.isi.mdl.entities.CertificatProfissional;
 import com.isi.mdl.entities.Competence;
 import com.isi.mdl.entities.Diplome;
@@ -25,6 +26,7 @@ import com.isi.mdl.mappers.DiplomeMapperImpl;
 import com.isi.mdl.mappers.DossierCondidatMapperImpl;
 import com.isi.mdl.mappers.LoisirDtoMapperImpl;
 import com.isi.mdl.mappers.SectionMapperImpl;
+import com.isi.mdl.mappers.UserMapperImpl;
 import com.isi.mdl.repositories.DossierCondidatRepository;
 import com.isi.mdl.repositories.SectionRepository;
 import com.isi.mdl.repositories.UserRepository;
@@ -39,21 +41,30 @@ import lombok.extern.slf4j.Slf4j;
 @Slf4j
 public class DossierCondidatServiceImpl implements DossierCondidatService {
 
-	private  DossierCondidatRepository  dossierCondidatRepository;
-	private  DossierCondidatMapperImpl      dtoMapperDossier;
+	private DossierCondidatRepository dossierCondidatRepository;
+	private DossierCondidatMapperImpl dtoMapperDossier;
 	private LoisirDtoMapperImpl loisirDtoMapper;
 	private DiplomeMapperImpl diplomeMapper;
 	private CertificatProfissionalMapperImpl certificatProfissionalMapper;
 	private CompetenceMapperImpl competenceMapper;
 	private UserRepository userRepository;
-	
+	private UserMapperImpl userMapper;
+
 	@Override
-	public DossierCondidatDto saveDossierCondidat(DossierCondidatDto dossierCondidatDto,String emailUser) {
+	public DossierCondidatDto saveDossierCondidat(DossierCondidatDto dossierCondidatDto, String emailUser) {
 		log.info("Save DossierCondidat");
-		User user=userRepository.findByEmail(emailUser);
-		log.info("User == "+user);
-		DossierCondidat dossierCondidat =dtoMapperDossier.fromDossierCondidatDto(dossierCondidatDto);
-		DossierCondidat  dossierCondidatSave=dossierCondidatRepository.save(dossierCondidat);
+		// User user=userRepository.findByEmail(emailUser);
+		// if (user!=null) {
+		// UserDto userSave=userMapper.fromUser(user);
+		// dossierCondidatDto.setUser(userSave);
+		// }
+		DossierCondidat dossierCondidat = dtoMapperDossier.fromDossierCondidatDto(dossierCondidatDto);
+		log.info("Save DossierCondidat Test " + dossierCondidat);
+	
+			DossierCondidat dossierCondidatSave = dossierCondidatRepository.save(dossierCondidat);
+	
+	
+		log.info("Test 2");
 		return dtoMapperDossier.fromDossierCondidat(dossierCondidat);
 	}
 

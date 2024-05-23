@@ -35,7 +35,7 @@ public class DossierCondidatDto {
 	private Niveau niveau;
 	private boolean active;
 	private AdressDto adress;
-	private UserDto user;
+	//private UserDto user;
 	private List<LoisirDto> loisirs;
 	private List<DiplomeDto>diplomes;
 	private List<CompetenceDto>competences;

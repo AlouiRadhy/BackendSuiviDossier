@@ -49,7 +49,7 @@ public class DossierCondidatMapperImpl {
 	
 	public DossierCondidatDto fromDossierCondidat (DossierCondidat dossierCondidat) {
 		DossierCondidatDto dossierCondidatDto = new DossierCondidatDto();
-
+		log.info("1");
 	    List<CompetenceDto> competenceDtp=dossierCondidat.getCompetences()
 	    		.stream()
 			    .map(competenceMapper::fromCompetence)
@@ -67,17 +67,18 @@ public class DossierCondidatMapperImpl {
 	    		.stream()
 			    .map(loisirDtoMapper::fromLoisir)
 			    .collect(Collectors.toList());
-	    
+	    log.info("5");
 	    AdressDto adressDtp=adressMapper.fromAdress(dossierCondidat.getAdress());
 	    
-	    UserDto userDtp=userMapper.fromUser(dossierCondidat.getUser());
+	   // UserDto userDtp=userMapper.fromUser(dossierCondidat.getUser());
 	    
 			    dossierCondidatDto.setCompetences(competenceDtp); 
 			    dossierCondidatDto.setDiplomes(DiplomeDtp);
 			    dossierCondidatDto.setCertificatProfissionals(certificatDtp);
 			    dossierCondidatDto.setLoisirs(loisDtp);
 			    dossierCondidatDto.setAdress(adressDtp);
-			    dossierCondidatDto.setUser(userDtp);
+			    log.info("tesssssssssssss");
+			   // dossierCondidatDto.setUser(userDtp);
 			    BeanUtils.copyProperties(dossierCondidat, dossierCondidatDto);
 	    return dossierCondidatDto;
 	}
@@ -102,13 +103,13 @@ public class DossierCondidatMapperImpl {
 			    .map(certificatProfissionalMapper::fromCertificatProfissionalDto)
 			    .collect(Collectors.toList());
 		Adress address =adressMapper.fromAdressDto(dossierCondidatDto.getAdress());
-		User user = userMapper.fromUserDto(dossierCondidatDto.getUser());
+		//User user = userMapper.fromUserDto(dossierCondidatDto.getUser());
 		dossierCondidat.setLoisirs(loisrs);
 		dossierCondidat.setCertificatProfissional(CertificatProfissionals);
 		dossierCondidat.setCompetences(competences);
 		dossierCondidat.setDiplomes(diplomes);
 		dossierCondidat.setAdress(address);
-		dossierCondidat.setUser(user);
+		//dossierCondidat.setUser(user);
 		BeanUtils.copyProperties(dossierCondidatDto,dossierCondidat);
 		return dossierCondidat;
 	}

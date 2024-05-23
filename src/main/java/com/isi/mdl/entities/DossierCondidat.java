@@ -96,9 +96,9 @@ public class DossierCondidat {
 	@JoinColumn(name = "adresse_id", referencedColumnName = "id_Adress")
 	private Adress adress;
 	
-	@OneToOne(cascade = CascadeType.ALL)
+	/*@OneToOne
 	@JoinColumn(name = "id_utilisateur", referencedColumnName = "id_utilisateur")
-	private User  user;
+	private User  user;*/
 	
 	
 	@OneToMany(cascade = CascadeType.ALL)
