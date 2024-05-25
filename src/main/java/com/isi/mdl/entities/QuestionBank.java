@@ -2,6 +2,7 @@ package com.isi.mdl.entities;
 
 import java.util.Date;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
@@ -43,7 +44,7 @@ public class QuestionBank {
 	private boolean active;
 	@Column(name = "point")
 	private int point;
-	@ManyToOne
+	@ManyToOne(cascade = CascadeType.REMOVE)
 	@JoinColumn(name = "id_section", referencedColumnName = "id_section")
 	@JsonIgnore
 	private Section section;
