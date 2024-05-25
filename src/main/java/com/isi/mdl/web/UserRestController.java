@@ -1,8 +1,11 @@
 package com.isi.mdl.web;
 
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Map;
 
 import org.apache.el.stream.Optional;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
@@ -18,9 +21,12 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.isi.mdl.dto.MailRequest;
+import com.isi.mdl.dto.MailResponse;
 import com.isi.mdl.dto.UserDto;
 import com.isi.mdl.entities.User;
 import com.isi.mdl.services.UserService;
+import com.isi.mdl.services.impl.EmailService;
 import com.isi.mdl.services.impl.MailService;
 import com.isi.mdl.utils.MailStructure;
 
@@ -35,6 +41,19 @@ public class UserRestController {
 
 	private UserService userService;
 	private MailService mailService; 
+	
+	
+	private EmailService emailservice;
+	
+	
+	@PostMapping("/sendingEmail")
+	public MailResponse sendEmail(@RequestBody MailRequest request) {
+		Map<String, Object> model = new HashMap<>();
+		model.put("Name", request.getName());
+		return emailservice.sendEmail(request, model);
+
+	}
+	
 	
 	@GetMapping("/loginUser")
 	public ResponseEntity<?> user(@RequestParam(name = "email") String email,
