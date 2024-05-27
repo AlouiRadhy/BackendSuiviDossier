@@ -1,5 +1,7 @@
 package com.isi.mdl.web;
 
+import java.util.List;
+
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
@@ -24,9 +26,9 @@ public class DossierCondidatRestController {
 	private DossierCondidatService  dossierCondidatService;
 	
 	@RequestMapping(value = "/SaveDossierCondidat", method = RequestMethod.POST)
-	public ResponseEntity<?> SaveDossierCondidat(@RequestBody DossierCondidatDto dossierCondidatDto,@RequestParam(name = "email") String email ) {
+	public ResponseEntity<?> SaveDossierCondidat(@RequestBody DossierCondidatDto dossierCondidatDto,@RequestParam(name = "email") String email ,@RequestParam List<Long> langueIds) {
 	    try {
-	    	DossierCondidatDto savedDossierCondidatDto = dossierCondidatService.saveDossierCondidat(dossierCondidatDto, email);
+	    	DossierCondidatDto savedDossierCondidatDto = dossierCondidatService.saveDossierCondidat(dossierCondidatDto, email,langueIds);
 	    	log.info("Save Api Section"+savedDossierCondidatDto);
 	        return ResponseEntity.status(HttpStatus.CREATED).body(savedDossierCondidatDto);
 	    } catch (Exception e) {

@@ -10,6 +10,7 @@ import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
+import com.isi.mdl.entities.Langue;
 import com.isi.mdl.enums.EtatCivile;
 import com.isi.mdl.enums.GENRE;
 import com.isi.mdl.enums.Niveau;
@@ -19,7 +20,7 @@ import lombok.Data;
 @Data
 public class DossierCondidatDto {
 
-	// private Long idDossier;
+	private Long idDossier;
 	@Temporal(TemporalType.DATE)
 	@Column(name = "Date_Naissance")
 	@JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "dd-MM-yyyy")
@@ -40,5 +41,6 @@ public class DossierCondidatDto {
 	private List<DiplomeDto>diplomes;
 	private List<CompetenceDto>competences;
 	private List<CertificatProfissionalDto> certificatProfissionals;
+	private List<LangueDto> langues;
 
 }

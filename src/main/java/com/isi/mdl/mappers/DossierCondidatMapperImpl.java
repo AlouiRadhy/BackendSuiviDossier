@@ -13,14 +13,18 @@ import com.isi.mdl.dto.CertificatProfissionalDto;
 import com.isi.mdl.dto.CompetenceDto;
 import com.isi.mdl.dto.DiplomeDto;
 import com.isi.mdl.dto.DossierCondidatDto;
+import com.isi.mdl.dto.LangueDto;
 import com.isi.mdl.dto.LoisirDto;
+import com.isi.mdl.dto.QuestionBankDto;
 import com.isi.mdl.dto.UserDto;
 import com.isi.mdl.entities.Adress;
 import com.isi.mdl.entities.CertificatProfissional;
 import com.isi.mdl.entities.Competence;
 import com.isi.mdl.entities.Diplome;
 import com.isi.mdl.entities.DossierCondidat;
+import com.isi.mdl.entities.Langue;
 import com.isi.mdl.entities.Loisir;
+import com.isi.mdl.entities.QuestionBank;
 import com.isi.mdl.entities.User;
 import com.isi.mdl.web.DossierCondidatRestController;
 
@@ -45,11 +49,13 @@ public class DossierCondidatMapperImpl {
 	@Autowired
 	private  UserMapperImpl userMapper;
 	
+	@Autowired
+	private LangueMapperImpl langueMapper;
+	
 	
 	
 	public DossierCondidatDto fromDossierCondidat (DossierCondidat dossierCondidat) {
 		DossierCondidatDto dossierCondidatDto = new DossierCondidatDto();
-		log.info("1");
 	    List<CompetenceDto> competenceDtp=dossierCondidat.getCompetences()
 	    		.stream()
 			    .map(competenceMapper::fromCompetence)
@@ -67,8 +73,11 @@ public class DossierCondidatMapperImpl {
 	    		.stream()
 			    .map(loisirDtoMapper::fromLoisir)
 			    .collect(Collectors.toList());
-	    log.info("5");
 	    AdressDto adressDtp=adressMapper.fromAdress(dossierCondidat.getAdress());
+	    
+	    
+	    List<LangueDto> langueDtp = dossierCondidat.getLangues().stream().map(langueMapper::fromLangue)
+				.collect(Collectors.toList());
 	    
 	   // UserDto userDtp=userMapper.fromUser(dossierCondidat.getUser());
 	    
@@ -77,7 +86,7 @@ public class DossierCondidatMapperImpl {
 			    dossierCondidatDto.setCertificatProfissionals(certificatDtp);
 			    dossierCondidatDto.setLoisirs(loisDtp);
 			    dossierCondidatDto.setAdress(adressDtp);
-			    log.info("tesssssssssssss");
+			    dossierCondidatDto.setLangues(langueDtp);
 			   // dossierCondidatDto.setUser(userDtp);
 			    BeanUtils.copyProperties(dossierCondidat, dossierCondidatDto);
 	    return dossierCondidatDto;
@@ -103,6 +112,9 @@ public class DossierCondidatMapperImpl {
 			    .map(certificatProfissionalMapper::fromCertificatProfissionalDto)
 			    .collect(Collectors.toList());
 		Adress address =adressMapper.fromAdressDto(dossierCondidatDto.getAdress());
+		List<Langue> Langue =dossierCondidatDto.getLangues().stream().map(langueMapper::fromLangueDto)
+				.collect(Collectors.toList());
+		dossierCondidat.setLangues(Langue);
 		//User user = userMapper.fromUserDto(dossierCondidatDto.getUser());
 		dossierCondidat.setLoisirs(loisrs);
 		dossierCondidat.setCertificatProfissional(CertificatProfissionals);

@@ -20,21 +20,21 @@
 							</div>
 							
 							<div style="font-size: 24px; color: #000;">
-								<br> Monsieur\Madame   <b>${Name}<br>
+								<br> <span style="font-size: 16px;">Bonjour,  </span> 
+								<b>${Name}<br>
 							</div>
 							<div>
-								<br> Suite a votre de demande 
-								 Votre mot de passe a été changé avec succès.
+								<br> Votre demande de changement de mot de passe a été traitée avec succès.
 								<br>
 										
 							</div>
 							
-							<div style="font-size: 18px; color:#00B9FF; ">
+							<div style="font-size: 16px; color:#00B9FF; ">
 							<br>
 							<a href="http://www.cni.tn/index.php/fr/">Centre National de l'Informatique</a>
 							</div>
 							<div>
-							<br>
+						
 							<br>
 							<img src="cid:logo.png" alt="logo" height="60">
 							</div>

@@ -30,4 +30,5 @@ public class SessionDto {
 	private int nbrCandidats;
 	private int successScore;
 	private List<QuestionBankDto> questions;
+	private List<DossierCondidatDto> dossiersCandidats;
 }

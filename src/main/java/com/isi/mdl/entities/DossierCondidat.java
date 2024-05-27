@@ -106,7 +106,7 @@ public class DossierCondidat {
 	private List<Diplome> Diplomes;
 
 	@ManyToMany
-	@JoinTable(name = "Dossier_Condidat_langue", joinColumns = @JoinColumn(name = "id_dossier"), inverseJoinColumns = @JoinColumn(name = "id_question"))
+	@JoinTable(name = "Dossier_Condidat_langue", joinColumns = @JoinColumn(name = "id_dossier"), inverseJoinColumns = @JoinColumn(name = "id_langue"))
 	@JsonIgnore
 	private List<Langue> langues;
 

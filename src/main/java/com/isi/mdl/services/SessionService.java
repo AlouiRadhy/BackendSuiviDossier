@@ -10,7 +10,7 @@ import com.isi.mdl.entities.Session;
 
 public interface SessionService {
 
-	SessionDto  saveSession (SessionDto sessionDto,List<Long> questionsIds);
+	SessionDto  saveSession (SessionDto sessionDto,List<Long> questionsIds, List<Long> condidatsIds);
 	
 	List<SessionDto> getAllSession();
 	

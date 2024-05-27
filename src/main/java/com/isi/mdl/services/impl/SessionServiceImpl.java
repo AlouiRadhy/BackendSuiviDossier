@@ -9,12 +9,16 @@ import org.aspectj.weaver.patterns.TypePatternQuestions.Question;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import com.isi.mdl.dto.DossierCondidatDto;
 import com.isi.mdl.dto.QuestionBankDto;
 import com.isi.mdl.dto.SessionDto;
+import com.isi.mdl.entities.DossierCondidat;
 import com.isi.mdl.entities.QuestionBank;
 import com.isi.mdl.entities.Session;
+import com.isi.mdl.mappers.DossierCondidatMapperImpl;
 import com.isi.mdl.mappers.QuestionBankMapperImpl;
 import com.isi.mdl.mappers.SessionMapperImpl;
+import com.isi.mdl.repositories.DossierCondidatRepository;
 import com.isi.mdl.repositories.QuestionBankRepository;
 import com.isi.mdl.repositories.SessionRepository;
 import com.isi.mdl.services.SessionService;
@@ -33,10 +37,10 @@ public class SessionServiceImpl  implements SessionService{
 	private SessionMapperImpl sessiondtoMapper;
 	private QuestionBankMapperImpl questionBankMapper;
 	private QuestionBankRepository questionRepoitory;
-
-	
+	private DossierCondidatRepository dossierCondidatRepository;
+	private  DossierCondidatMapperImpl dossierCondidatMapper;
 	@Override
-	public SessionDto saveSession(SessionDto sessionDto, List<Long> questionsIds) {
+	public SessionDto saveSession(SessionDto sessionDto, List<Long> questionsIds, List<Long> condidatsIds) {
 		
 		 List<QuestionBank> questions = questionsIds.stream()
 	                .map(id -> questionRepoitory.findById(id))
@@ -46,6 +50,21 @@ public class SessionServiceImpl  implements SessionService{
 		 List<QuestionBankDto> questionsDto=questions.stream()
 				    .map(questionBankMapper::fromQuestionBank)
 				    .collect(Collectors.toList());
+		 
+		 
+		 sessionDto.setQuestions(questionsDto);
+		 
+		 
+		 List<DossierCondidat> dossierCondidats = condidatsIds.stream()
+	                .map(id -> dossierCondidatRepository.findById(id))
+	                .filter(Optional::isPresent)
+	                .map(Optional::get)
+	                .collect(Collectors.toList());
+		 List<DossierCondidatDto> dossierCondidatso=dossierCondidats.stream()
+				    .map(dossierCondidatMapper::fromDossierCondidat)
+				    .collect(Collectors.toList());
+		 
+		 sessionDto.setDossiersCandidats(dossierCondidatso);
 		 sessionDto.setQuestions(questionsDto);
 		log.info("Save Session : " + sessionDto);
 		Session session =sessiondtoMapper.fromSessionDto(sessionDto);

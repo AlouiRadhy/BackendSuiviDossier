@@ -69,4 +69,14 @@ public class Session {
     )
     @JsonIgnore
     private List<QuestionBank> questions;
+    
+    
+    @ManyToMany
+    @JoinTable(
+        name = "Session_Dossier_Condidat",
+        		joinColumns = @JoinColumn(name = "id_session"),
+                inverseJoinColumns = @JoinColumn(name = "id_dossier")
+    )
+    @JsonIgnore
+    private List<DossierCondidat> dossierCondidats;
 }

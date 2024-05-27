@@ -30,11 +30,11 @@ public class SessionRestController {
 	
 	
 	@RequestMapping(value = "/SaveSession", method = RequestMethod.POST)
-	public ResponseEntity<?> saveSession(@RequestBody SessionDto sessionDto,@RequestParam List<Long> questionsIds) {
+	public ResponseEntity<?> saveSession(@RequestBody SessionDto sessionDto,@RequestParam List<Long> questionsIds  , @RequestParam List<Long> condidatsIds) {
 	    try {
 	    	
 	    	
-	    	SessionDto savedSessionDto = sessionService.saveSession(sessionDto,questionsIds);
+	    	SessionDto savedSessionDto = sessionService.saveSession(sessionDto,questionsIds,condidatsIds);
 	        return ResponseEntity.status(HttpStatus.CREATED).body(savedSessionDto);
 	    } catch (Exception e) {
 	        return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Une erreur est survenue lors de l'enregistrement de la Session.");

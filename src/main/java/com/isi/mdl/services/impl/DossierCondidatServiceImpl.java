@@ -3,6 +3,7 @@ package com.isi.mdl.services.impl;
 import java.util.Optional;
 import java.util.stream.Collectors;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import java.util.ArrayList;
@@ -12,22 +13,28 @@ import com.isi.mdl.dto.CertificatProfissionalDto;
 import com.isi.mdl.dto.CompetenceDto;
 import com.isi.mdl.dto.DiplomeDto;
 import com.isi.mdl.dto.DossierCondidatDto;
+import com.isi.mdl.dto.LangueDto;
 import com.isi.mdl.dto.LoisirDto;
+import com.isi.mdl.dto.QuestionBankDto;
 import com.isi.mdl.dto.UserDto;
 import com.isi.mdl.entities.CertificatProfissional;
 import com.isi.mdl.entities.Competence;
 import com.isi.mdl.entities.Diplome;
 import com.isi.mdl.entities.DossierCondidat;
+import com.isi.mdl.entities.Langue;
 import com.isi.mdl.entities.Loisir;
+import com.isi.mdl.entities.QuestionBank;
 import com.isi.mdl.entities.User;
 import com.isi.mdl.mappers.CertificatProfissionalMapperImpl;
 import com.isi.mdl.mappers.CompetenceMapperImpl;
 import com.isi.mdl.mappers.DiplomeMapperImpl;
 import com.isi.mdl.mappers.DossierCondidatMapperImpl;
+import com.isi.mdl.mappers.LangueMapperImpl;
 import com.isi.mdl.mappers.LoisirDtoMapperImpl;
 import com.isi.mdl.mappers.SectionMapperImpl;
 import com.isi.mdl.mappers.UserMapperImpl;
 import com.isi.mdl.repositories.DossierCondidatRepository;
+import com.isi.mdl.repositories.LangueRepository;
 import com.isi.mdl.repositories.SectionRepository;
 import com.isi.mdl.repositories.UserRepository;
 import com.isi.mdl.services.DossierCondidatService;
@@ -49,15 +56,32 @@ public class DossierCondidatServiceImpl implements DossierCondidatService {
 	private CompetenceMapperImpl competenceMapper;
 	private UserRepository userRepository;
 	private UserMapperImpl userMapper;
-
+	private LangueRepository langueRepository;
+	private DossierCondidatMapperImpl dossierCondidatMapper;
+    private LangueMapperImpl langueMapper;
+    
 	@Override
-	public DossierCondidatDto saveDossierCondidat(DossierCondidatDto dossierCondidatDto, String emailUser) {
+	public DossierCondidatDto saveDossierCondidat(DossierCondidatDto dossierCondidatDto, String emailUser, List<Long> langueIds) {
 		log.info("Save DossierCondidat");
 		// User user=userRepository.findByEmail(emailUser);
 		// if (user!=null) {
 		// UserDto userSave=userMapper.fromUser(user);
 		// dossierCondidatDto.setUser(userSave);
 		// }
+		
+		 List<Langue> langues = langueIds.stream()
+	                .map(id -> langueRepository.findById(id))
+	                .filter(Optional::isPresent)
+	                .map(Optional::get)
+	                .collect(Collectors.toList());
+		 List<LangueDto> languesDto=langues.stream()
+				    .map(langueMapper::fromLangue)
+				    .collect(Collectors.toList());
+		 
+			log.info("2");
+		 dossierCondidatDto.setLangues(languesDto);	
+		
+		
 		DossierCondidat dossierCondidat = dtoMapperDossier.fromDossierCondidatDto(dossierCondidatDto);
 		log.info("Save DossierCondidat Test " + dossierCondidat);
 	
